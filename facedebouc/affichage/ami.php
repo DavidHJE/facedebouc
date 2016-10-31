@@ -35,9 +35,70 @@ include("entete.php");
 // Les deux paramètres sont le $_SESSION['id']
 
 
+?>
+
+<h2>Mes amis</h2>
+<ul>
+<?php 
+    $sql = "SELECT utilisateur.* FROM utilisateur INNER JOIN lien ON idUtilisateur1=utilisateur.id AND etat='ami' AND idUTilisateur2=? UNION SELECT utilisateur.* FROM utilisateur INNER JOIN lien ON idUtilisateur2=utilisateur.id AND etat='ami' AND idUTilisateur1=?";
+    $query=$pdo->prepare($sql);
+    $query->execute(array($_SESSION['id'],$_SESSION['id']));
+    while ($line = $query->fetch()) {
+        echo "<li>";
+        echo lien("mur.php?id=".$line['id'],$line['login']);
+        echo "</li>";
+    }
+?>
+</ul>
+
+<h2>Atente de la reponse</h2>
+<ul>
+<?php
+    $sql = "SELECT utilisateur.* FROM utilisateur WHERE id IN(SELECT idUtilisateur1 FROM lien WHERE idUtilisateur2=? AND etat='attente')";
+    $query=$pdo->prepare($sql);
+    $query->execute(array($_SESSION['id']));
+    while ($line = $query->fetch()) {
+        echo "<li>";
+        echo $line['login'];
+        echo " ".lien("#","oui")." ".lien("#","non");
+        echo "</li>";
+    }
+?>
+</ul>
+
+<h2>Atente de valider</h2>
+<ul>
+<?php
+    $sql = "SELECT utilisateur.* FROM utilisateur INNER JOIN lien ON utilisateur.id=idUtilisateur2 AND etat='attente' AND idUtilisateur1=?";
+    $query=$pdo->prepare($sql);
+    $query->execute(array($_SESSION['id']));
+    while ($line = $query->fetch()) {
+        echo "<li>";
+        echo $line['login'];
+        echo " ".lien("#","oui")." ".lien("#","non");
+        echo "</li>";
+    }
+?>
+</ul>
 
 
-/*echo "<input type='text' name='nomami'/>";
+<h2>Ajouter un ami(à faire)</h2>
+<form action="../traitement/rechercher.php" method="post">
+    <fieldset>
+        <legend>Recherche un ami</legend>
+        <input type="text" name="pseudo" placeholder="pseudo" required="required"> <br />
+        <input type="submit" name="publier">
+    </fieldset>
+</form>
+<p>Résultat de la recherche :</p> <br />
+<?php //les donné retournée?>
+
+
+
+
+<?php //cequi était déja present
+/*
+echo "<input type='text' name='nomami'/>";
 echo "<input type='button' name='button' />";
 if(isset($_GET['id'])) { // Le formulaire a été soumis
     $sql = "INSERT INTO lien VALUES(NULL,?,?,"attente");";
@@ -45,9 +106,7 @@ if(isset($_GET['id'])) { // Le formulaire a été soumis
     $query->execute(array($_POST['login'],$_POST['passwd']));
     
     // Un seul résultat possible : login est unique
-    $line = $query->fetch();*/
-echo "<input type='text' name='nomami'/>";
-echo "<input type='button' name='button' />";
+    $line = $query->fetch();
 switch($action)
 {
     case "add": //On veut ajouter un ami
@@ -60,8 +119,9 @@ switch($action)
     </p></form>';
     }
 }
-
+*/
 ?>
+
 
 
 <?php

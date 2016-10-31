@@ -34,7 +34,7 @@ if( !is_dir(TARGET) ) {
 		//Script pour le téléchargement//
 if(isset($_POST['publier'])){ // On verifie si le formulaire a était soumis
 
-  if(isset($_FILES['fichier']['name']) ){  //vérifie si un fichier a était soumis
+  if(!empty($_FILES['fichier']['name']) ){  //vérifie si un fichier a était soumis
     $extension  = pathinfo($_FILES['fichier']['name'], PATHINFO_EXTENSION); // Récupere l'extension du fichier
 
     if(in_array(strtolower($extension),$tabExt)){ // On recherche dans le tableau d'extention si l'extention recupérer juste avant est correct (strtolower = transforme le chaine de caractère en minuscule)
@@ -53,7 +53,7 @@ if(isset($_POST['publier'])){ // On verifie si le formulaire a était soumis
             // Si c'est OK, on teste l'upload
             if(move_uploaded_file($_FILES['fichier']['tmp_name'], TARGET.$nomImage))
             {
-              $message = 'Upload réussi !';
+              $message = 'Upload image réussi !';
               $emplacement = TARGET.$nomImage;
             }
             else
@@ -91,6 +91,8 @@ if(isset($_POST['publier'])){ // On verifie si le formulaire a était soumis
     $message = 'Aucune image a était rajouter';
   }
 }
+
+$_SESSION['message']=$message;
 
 //variable pour sql//
 $idAuteur = $_SESSION['id'];

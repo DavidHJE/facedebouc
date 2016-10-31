@@ -74,6 +74,11 @@ $line = $query->fetch();
 
 
 <?php
+if (isset($_SESSION['message'])) {
+	echo $_SESSION['message'];
+	unset($_SESSION['message']);
+}
+
 $sql = "SELECT * FROM ecrit WHERE idAmi=? ORDER BY dateEcrit DESC";
 $query=$pdo->prepare($sql);
 $query->execute(array($_GET['id']));
