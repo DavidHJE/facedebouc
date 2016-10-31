@@ -10,7 +10,6 @@ if(!isset($_SESSION['id'])) {
 
 
 include("entete.php");
-include ('menu.php');
 
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])) { //Si on n a pas donné le numéro de l'id de la personne ou si l'id n'est pas numérique dont on veut afficher le mur.
 	echo "Bizarre !!!!";// On affiche un message 
@@ -87,15 +86,18 @@ while($line = $query->fetch()){
 	$posterpar[]=$line['idAuteur'];
 }
 
-
+echo "<div id='commentaires'>";
 if (!empty ($com)) {
 	for ($i=0;$i <count($com);$i++) {
 		echo "<h4>$titre[$i]</h4>";
 		echo "$com[$i]";
 		echo "<br />";
-		echo "<img src='$img[$i]' width=600 height=idem alt='image'>";
+		echo "<img src='$img[$i]' alt='image'>";
 		echo "<br />";
-		echo "date: $date[$i]";
+		$dates = $date[$i];
+		list($jour, $heur) = explode(" ", $dates);
+		list($anne, $mois, $jour) = explode("-", $jour);
+		echo "Le $jour/$mois/$anne à $heur";
 		echo "<br />";
 		echo "poster par: ";
 		$sql = "SELECT * FROM utilisateur WHERE id=?";
@@ -112,6 +114,7 @@ if (!empty ($com)) {
 else {
 	echo"<br />Vous n'avez aucune publication.";
 }
+echo "</div>";
 
 include("pied.php");
 ?>

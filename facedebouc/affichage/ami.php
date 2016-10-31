@@ -16,7 +16,6 @@ if(!isset($_SESSION['id'])) {
 
 
 include("entete.php");
-include("menu.php");
 // Il faut faire des requêtes pour afficher ses amis, les attentes, les gens qu'on a invités qui ont pas répondu etc..
 // Elles sont listées ci-dessous
 

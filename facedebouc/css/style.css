@@ -1,16 +1,95 @@
 html {
-    background-color: #937a58;
+    background-color: #408af9;
 }
+
 body { 
     margin: 50px;
     padding: 30px;
+    margin-left: 15%;
+    margin-right: 15%;
     background: #fff;
     font-family: Georgia;
-    box-shadow: 1px 1px 15px #000;
+    box-shadow: 1px 1px 40px #FFF;
 }
+
 textarea{ 
 	resize:none;
 }
-li{
-	display: inline;
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+ h1{
+    text-align: center;
+    color: black;
+    padding: 1%;
+    margin: 1%;
+ }
+
+#menu {
+ padding:0;
+ margin:0;
+ margin-bottom: 50px;
+ list-style-type:none;
+ }
+
+#menu li {
+ display: inline;
+ border-left:1px solid black;
+ }
+
+#menu li a {
+ display:block-inline;
+ float:left;   
+ width:33%;
+ line-height:50px; /*hauteur de l'image de fond*/
+ background-image:linear-gradient(#FFF, #408af9);
+ color:#111;
+ text-decoration:none;
+ text-align:center;
+ }
+
+#menu li a:hover {
+  background-image:linear-gradient(#408af9, #FFF);
+ color:white;
+ }  
+
+ #commentaires {
+ 	margin-top: 0.5%;
+ 	margin-left: 0.1%;
+ 	padding: 1%;
+ 	border: black 1px solid;
+ }
+
+ footer {
+  clear: both;
+  color: #666;  
+  margin: 2% 0 1% 0; 
+  width: 100%;
+  padding: 1% 0;
+  text-align: center;
+  background: #F8F7F7;
+  border-top: 1px solid #F2F2F2;  
+ }
+
+footer a {
+  text-decoration: none;
+  color: #666666;
+  font-weight: bold;
+}
+
+footer a:hover {
+  color: #000;  
+}
+
+footer p {
+  padding: 0.5% 0;
+}
+
+legend {
+    display: block;
+    padding-left: 0.3%;
+    padding-right: 0.3%;
 }

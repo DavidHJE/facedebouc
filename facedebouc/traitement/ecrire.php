@@ -13,9 +13,9 @@ if(!isset($_SESSION['id'])) {
 
 		//CONSTANTE//
 define('TARGET', '../images/');
-define('MAX_SIZE', 1440000);
-define('WIDTH_MAX', 1200);
-define('HEIGHT_MAX', 1200);
+define('MAX_SIZE', 2097152); //2mo
+define('WIDTH_MAX', 1200);  //1200 px
+define('HEIGHT_MAX', 1200); //1200 px
 
 		//Tableaux de donnees//
 $tabExt = array('jpg','gif','png','jpeg');// Extensions autorisees
